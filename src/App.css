@@ -1,38 +1,129 @@
-.App {
-  text-align: center;
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+li{
+    list-style: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+img.char-selection-image {
+    height: 25px;
+    width: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  [type=radio] + img {
+    cursor: pointer;
   }
-  to {
-    transform: rotate(360deg);
+  [type=radio]:checked + img {
+    outline: 2px solid #f00;
   }
+ 
+.char-label{
+    margin-right:20px;
+}
+.character-found-list p{
+    display: inline;
+}
+.game-image-container{
+    width: 100%;
+    height: auto;
+    position: relative;
+} 
+
+.game-image-container > img{
+    width:100%;
+}
+.img-found, .img-not-found{
+    width: 30px;
+    height:30px;
+    margin-left: 15px;
+} 
+
+.img-found{
+    opacity: 0.3;
+}
+.main-container{
+    position: relative;
+}
+.modal-overlay{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(241, 109, 33, 0.959);
+    position: absolute;
+    top:0;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: visible;
+    z-index: 10;
+}
+
+.hide-modal{
+    visibility: hidden;
+    z-index: -1;
+}
+
+.modal h1{
+    margin: 400px 0 0 0;
+}
+
+.modal-image{
+    width: 50px;
+    height: 50px;
+}
+
+/* Tooltip character selection */
+.char-selection{
+    display: flex;
+    flex-direction:column;
+}
+.char-selection > label {
+    margin-bottom: 10px;
+}
+.char-label{
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+}
+.char-label > img{
+    margin: 0 10px 0 0;
+ }
+.char-selection-tooltip{
+    width: 170px;
+    height: 170px;
+    background-color: white;
+    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.4);
+    position:absolute;
+    /* top:0;
+    left:0;  */
+    padding: 0 0 0 15px;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.show-tooltip{
+    visibility: visible;
+    z-index: 10;
+}
+.tooltip-title{
+    font-size: 0.9em;
+    margin: 15px 0;
+}
+.current-level{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
 }
