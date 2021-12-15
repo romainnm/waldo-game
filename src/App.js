@@ -8,12 +8,10 @@ function App() {
   return (
     <BrowserRouter>
       <main>
-        {/* <Navbar /> */}
         <Routes>
           <Route exact path='/' element={<Game/>} />
         </Routes>
       </main> 
-      {/* <Modal /> */}
     </BrowserRouter>
   );
 }

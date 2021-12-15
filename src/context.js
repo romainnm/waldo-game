@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { characterList } from "./data";
 import { levelList } from "./data";
 const AppContext = React.createContext();
@@ -14,6 +14,7 @@ const AppProvider = ({ children }) => {
   const [gameStart, setGameStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [finalTime, setFinalTime] = useState(0);
+  const dropdownContainer = useRef(null);
 
   const openDropdown = () => {
     setShowDropdown(true);
@@ -45,6 +46,7 @@ const AppProvider = ({ children }) => {
         setGameOver,
         finalTime,
         setFinalTime,
+        dropdownContainer,
       }}
     >
       {children}

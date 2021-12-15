@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import ModalGameOver from "./ModalGameOver";
+import ModalGameStart from "./ModalGameStart";
+import CharacterDropdown from "./CharacterDropdown";
+import AlertsGame from "./AlertsGame";
 import { useGlobalContext } from "../context";
 import { MdOutlineTimer } from "react-icons/md";
 
@@ -10,7 +14,6 @@ export default function Game() {
     openDropdown,
     closeDropdown,
     showDropdown,
-    alert,
     setAlert,
     currentLevel,
     /* setCurrentLevel, */
@@ -22,8 +25,8 @@ export default function Game() {
     setGameStart,
     gameOver,
     setGameOver,
-    finalTime,
     setFinalTime,
+    dropdownContainer,
   } = useGlobalContext();
   const [clickPosition, setClickPosition] = useState({
     left: 0,
@@ -31,22 +34,22 @@ export default function Game() {
   });
   const [showAlert, setShowAlert] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const dropdownContainer = useRef(null);
+  
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
-  })
+  });
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleResize = () => {
       setWindowSize({
-        width:window.innerWidth,
-        height:window.innerHeight,
-      })
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  })
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
 
   const clickLocation = (e) => {
     const xClickCoord =
@@ -165,7 +168,7 @@ export default function Game() {
   }, [clickPosition]);
 
   useEffect(() => {
-    if(gameStart){
+    if (gameStart) {
       const timer = setInterval(() => {
         setGamerTimer((prev) => prev + 1);
       }, 1000);
@@ -173,7 +176,7 @@ export default function Game() {
     }
   }, [startTimer]);
 
-  if(gameStart){
+  if (gameStart) {
     return (
       <>
         <header>
@@ -208,9 +211,7 @@ export default function Game() {
             </div>
           </div>
           {showAlert && (
-            <div className={`alert alert-${alert.type}`}>
-              <p>{alert.msgAlert}</p>
-            </div>
+            <AlertsGame/>
           )}
           <div className="game-image__container">
             <img
@@ -219,57 +220,18 @@ export default function Game() {
               onClick={(e) => handleImageClick(e)}
             />
             {showDropdown && (
-              <div className="characters-dropdown" ref={dropdownContainer}>
-                <h4>Select a character</h4>
-                <form className="characters-selection">
-                  {characters.map((character) => {
-                    const { id, name, image } = character;
-                    return (
-                      <label key={id} className="character-label">
-                        <input
-                          type="radio"
-                          name="character-label"
-                          value={name}
-                          onChange={(e) => handleCharacterSelection(e)}
-                        />
-                        <img src={image} alt={name} />
-                        <p>{name}</p>
-                      </label>
-                    );
-                  })}
-                </form>
-              </div>
+              <CharacterDropdown
+                handleCharacterSelection={handleCharacterSelection}
+              />
             )}
           </div>
         </section>
       </>
-    )}
-    if(gameOver){
-      return (
-        <div className="modal">
-          <h2>Level clear !</h2>
-          <div className="clear-time">
-            <p>clear time</p>
-            <h3><MdOutlineTimer /> {finalTime}s</h3>
-          </div>
-          <p>Would you like to proceed to the next level?</p>
-          <button>Next Level</button>
-        </div>
-      );
-    }
-
-    return(
-   <div className="modal">
-          <h2>Welcome to the Waldo project</h2>
-          <h3>Instructions</h3>
-          <p>
-            Waldo, Wenda and Oddlaw are hiding again! Find them as quickly as
-            possible
-          </p>
-          <button onClick={handleGameStart}>Start Game</button>
-        </div>
-  )
+    );
+  }
+  if (gameOver) {
+    return <ModalGameOver />;
   }
 
-  
-  
+  return <ModalGameStart handleGameStart={handleGameStart}/>;
+}
