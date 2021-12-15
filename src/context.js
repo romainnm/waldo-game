@@ -1,48 +1,50 @@
-import React, {useState, useContext} from 'react';
-
+import React, { useState, useContext } from "react";
+import { characterList } from "./data";
+import { levelList } from "./data";
 const AppContext = React.createContext();
 
-const AppProvider = ({children}) => {
-    const [isGameStarted, setIsGameStarted] = useState(false);
-    const [isGameFinished, setIsGameFinished] = useState(false);
-    const [isModalOn, setModalOn] = useState(true);
-    const [isTimerActive, setIsTimerActive] = useState(false)
+const AppProvider = ({ children }) => {
+  const [characters, setCharacters] = useState(characterList);
+  const [levels, setLevels] = useState(levelList);
+  const [showModal, setShowModal] = useState(false);
+  const [alert, setAlert] = useState({ type: "", msgAlert: "" });
+  const [currentLevel, setCurrentLevel] = useState(0);
+  const [startTimer, setStartTimer] = useState(true);
+  const [gameTimer, setGamerTimer] = useState(0);
 
-    const startGame = () => {
-        setIsGameStarted(true)
-        setModalOn(false)
-        setIsTimerActive(true)
-    }
-    const endGame = () => {
-        setIsGameFinished(true)
-    }
-    const openModal = () => {
-        setModalOn(true)
-    }
-    const handleTimer = () => {
-        setIsTimerActive(true);
-    }
-
-    return(
-        <AppContext.Provider
-            value={{
-                isGameFinished,
-                isGameStarted,
-                isModalOn,
-                startGame,
-                endGame,
-                openModal,
-                isTimerActive,
-                handleTimer
-            }}
-        >
-            {children}
-        </AppContext.Provider>
-    );
-}
-
-export const useGlobalContext = () => {
-    return useContext(AppContext)
+  const openModal = () => {
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  return (
+    <AppContext.Provider
+      value={{
+        characters,
+        setCharacters,
+        levels,
+        setLevels,
+        openModal,
+        closeModal,
+        showModal,
+        alert,
+        setAlert,
+        currentLevel,
+        setCurrentLevel,
+        startTimer,
+        setStartTimer,
+        gameTimer,
+        setGamerTimer,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
-export {AppContext, AppProvider}
+export const useGlobalContext = () => {
+  return useContext(AppContext);
+};
+
+export { AppContext, AppProvider };

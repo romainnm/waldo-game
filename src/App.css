@@ -1,22 +1,60 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
+/*
+=============== 
+Variables
+===============
+*/
+:root {
+  --clr-grey-1: hsl(209, 61%, 16%);
+  --clr-grey-2: hsl(210, 36%, 96%);
+  --clr-grey-3: hsl(210, 22%, 49%);
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --transition: all 0.3s linear;
+  --radius: 0.25rem;
 }
-header{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
+/*
+=============== 
+Global Styles
+===============
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-li{
-    list-style: none;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: var(--clr-grey-2);
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  /* font-size: 0.875rem; */
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  line-height: 1.25;
+}
+p {
+  color: var(--clr-grey-3);
 }
 
-img.char-selection-image {
-    height: 25px;
-    width: 25px;
-}
-
+/*
+=============== 
+Waldo project
+===============
+*/
+/* 
 [type=radio] { 
     position: absolute;
     opacity: 0;
@@ -42,88 +80,100 @@ img.char-selection-image {
     position: relative;
 } 
 
-.game-image-container > img{
-    width:100%;
-}
-.img-found, .img-not-found{
-    width: 30px;
-    height:30px;
-    margin-left: 15px;
-} 
+ */
 
-.img-found{
-    opacity: 0.3;
+main {
+  width: 95vw;
+  height: 100vh;
+  margin: 0 auto;
+
 }
-.main-container{
+header {
+  margin-top: 2rem;
+}
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.remaining-characters__title {
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+.remaining-characters__images img {
+  width: 30px;
+  height: 30px;
+  margin-left: 0.7rem;
+  float: right;
+}
+.remaining-characters-found {
+  opacity: 0.35;
+}
+.game-image__container{
     position: relative;
 }
-.modal-overlay{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(241, 109, 33, 0.959);
-    position: absolute;
-    top:0;
-    left:0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    visibility: visible;
-    z-index: 10;
+.game-image__container img {
+  width: 100%;
 }
-
-.hide-modal{
-    visibility: hidden;
-    z-index: -1;
+.game__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
-
-.modal h1{
-    margin: 400px 0 0 0;
+.game__header .timer{
+  display: flex;
+  align-items: center;
+  padding:5px 0;
 }
-
-.modal-image{
-    width: 50px;
-    height: 50px;
+.game__header h3 {
+  font-size: 1rem;
+  color: hsl(209, 59%, 70%);
 }
-
-/* Tooltip character selection */
-.char-selection{
-    display: flex;
-    flex-direction:column;
+.game__header h2{
+  font-size: 1.5rem;
 }
-.char-selection > label {
+.alert {
+    text-align: center;
+    border-radius: var(--radius);
     margin-bottom: 10px;
 }
-.char-label{
-    font-size: 0.85em;
-    display: flex;
-    align-items: center;
+.alert-success {
+    background-color: rgb(130, 223, 157);
 }
-.char-label > img{
-    margin: 0 10px 0 0;
- }
-.char-selection-tooltip{
-    width: 170px;
-    height: 170px;
-    background-color: white;
-    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.4);
-    position:absolute;
-    /* top:0;
-    left:0;  */
-    padding: 0 0 0 15px;
-    visibility: hidden;
-    z-index: -1;
+.alert-danger {
+    background-color: rgb(223, 130, 130);
 }
 
-.show-tooltip{
-    visibility: visible;
-    z-index: 10;
+.alert p{
+    color:#fff;
+    font-weight:bold;
 }
-.tooltip-title{
-    font-size: 0.9em;
-    margin: 15px 0;
+
+.characters-modal{
+    position: absolute;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, .2);
+    max-width:180px;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
 }
-.current-level{
-    width: 100%;
-    text-align: center;
-    margin-bottom: 50px;
+
+.characters-modal h4{
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+} 
+.characters-selection img{
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+}
+.character-label{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.character-label p{
+    font-size: 0.725rem;
+    padding-left: 10px;
 }
