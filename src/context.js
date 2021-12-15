@@ -6,17 +6,20 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [characters, setCharacters] = useState(characterList);
   const [levels, setLevels] = useState(levelList);
-  const [showModal, setShowModal] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [alert, setAlert] = useState({ type: "", msgAlert: "" });
   const [currentLevel, setCurrentLevel] = useState(0);
-  const [startTimer, setStartTimer] = useState(true);
+  const [startTimer, setStartTimer] = useState(false);
   const [gameTimer, setGamerTimer] = useState(0);
+  const [gameStart, setGameStart] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [finalTime, setFinalTime] = useState(0);
 
-  const openModal = () => {
-    setShowModal(true);
+  const openDropdown = () => {
+    setShowDropdown(true);
   };
-  const closeModal = () => {
-    setShowModal(false);
+  const closeDropdown = () => {
+    setShowDropdown(false);
   };
   return (
     <AppContext.Provider
@@ -25,17 +28,23 @@ const AppProvider = ({ children }) => {
         setCharacters,
         levels,
         setLevels,
-        openModal,
-        closeModal,
-        showModal,
+        openDropdown,
+        closeDropdown,
+        showDropdown,
         alert,
         setAlert,
         currentLevel,
-        setCurrentLevel,
+        /* setCurrentLevel, */
         startTimer,
         setStartTimer,
         gameTimer,
         setGamerTimer,
+        gameStart,
+        setGameStart,
+        gameOver,
+        setGameOver,
+        finalTime,
+        setFinalTime,
       }}
     >
       {children}
