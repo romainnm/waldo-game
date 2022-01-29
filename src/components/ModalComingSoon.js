@@ -10,9 +10,6 @@ function ModalComingSoon() {
         <button type="button" onClick={restart}>
           Restart
         </button>
-        <button type="button" className="btn-again" onClick={playAgain}>
-          Play Again
-        </button>
       </div>
     </main>
   );

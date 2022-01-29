@@ -118,7 +118,7 @@ const AppProvider = ({ children }) => {
   };
   const restart = () => {
     setLevelSelected(1);
-    handleGameStart();
+    setWaitStartGame(true);
   };
 
   /* === Click & coordintates logics === */
