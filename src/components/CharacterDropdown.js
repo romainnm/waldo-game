@@ -1,12 +1,13 @@
 import { useGlobalContext } from "../context";
+//Components
+import AlertsGame from "./AlertsGame";
 
 function CharacterDropdown({ handleCharacterSelection }) {
-  
-  const { characters, dropdownContainer } = useGlobalContext();
-
+  const { characters, dropdownContainer, alert } = useGlobalContext();
 
   return (
     <div className="characters-dropdown" ref={dropdownContainer}>
+      {alert.show && <AlertsGame />}
       <h4>Select a character</h4>
       <form className="characters-selection">
         {characters.map((character) => {
@@ -29,4 +30,4 @@ function CharacterDropdown({ handleCharacterSelection }) {
   );
 }
 
-export default CharacterDropdown
+export default CharacterDropdown;
