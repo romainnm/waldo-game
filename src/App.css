@@ -153,16 +153,17 @@ header {
 }
 .modal {
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   background-color: rgba(133, 180, 224, 0.95);
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding-top: 50px;
 }
 .modal h2 {
   margin-bottom: 30px;
@@ -170,10 +171,10 @@ header {
 .modal h3 {
   margin-bottom: 5px;
 }
-.btn-again {
+.btn-next {
   background-color: hsl(216, 69%, 37%) !important;
 }
-.btn-again:hover {
+.btn-next:hover {
   background: var(--clr-primary-8) !important;
 }
 .modal button {
@@ -204,9 +205,58 @@ header {
   align-items: center;
   padding-bottom: 20px;
 }
-
+.modal .title-top {
+  margin-top: 20px;
+}
 .gameover-modal {
   background-color: rgba(173, 229, 151, 0.95);
 }
+.button-container {
+  display: flex;
+}
+.button-container button {
+  margin: 20px 10px 0;
+}
+.leaderboards-container {
+  display: flex;
+}
 
+.leaderboard {
+  margin: 0 2rem;
+}
 
+.leaderboard h2 {
+  margin: 20px 10px 10px 0;
+  text-align: center;
+}
+
+.leaderboard .center {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.bold {
+  font-weight: 700;
+}
+.input-leaderboard {
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  margin-right: 10px;
+}
+.btn-leaderboard {
+  font-size: 0.8rem !important;
+}
+.form-topten {
+  text-align: center;
+}
+.form-topten .form-title {
+  margin-top: 20px;
+}
+.form-topten p {
+  margin-bottom: 10px;
+}
+.form-topten button {
+  margin-top: 0;
+}

@@ -5,16 +5,17 @@ import { MdOutlineTimer } from "react-icons/md";
 // Components
 import Header from "./Header";
 import CharacterDropdown from "./CharacterDropdown";
-
+import Stopwatch from "./Stopwatch";
+// Datas
 import levels from "../data";
 
 const GameStart = () => {
   const {
     showDropdown,
     levelSelected,
-    gameTimer,
     handleCharacterSelection,
     handleImageClick,
+    gameTimer,
   } = useGlobalContext();
 
   return (
@@ -25,7 +26,10 @@ const GameStart = () => {
           <h2>{levels[levelSelected - 1].name}</h2>
           <div className="timer">
             <MdOutlineTimer />
-            <h3 className="timer">{gameTimer}s</h3>
+            <h3 className="timer">
+
+            <Stopwatch timer={gameTimer} />
+            </h3>
           </div>
         </div>
         <div className="game-image__container">
@@ -36,7 +40,9 @@ const GameStart = () => {
           />
           {showDropdown && (
             <CharacterDropdown
-              handleCharacterSelection={(e) => handleCharacterSelection(e.target)}
+              handleCharacterSelection={(e) =>
+                handleCharacterSelection(e.target)
+              }
             />
           )}
         </div>

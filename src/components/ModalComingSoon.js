@@ -1,7 +1,7 @@
 import { useGlobalContext } from "../context";
 
 function ModalComingSoon() {
-  const { playAgain, restart } = useGlobalContext();
+  const { restart } = useGlobalContext();
   return (
     <main>
       <div className="modal">

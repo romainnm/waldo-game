@@ -1,4 +1,6 @@
 import { useGlobalContext } from "../context";
+// Components
+import Leaderboard from "./Leaderboard";
 
 function ModalGameStart() {
   const { handleGameStart } = useGlobalContext();
@@ -12,6 +14,15 @@ function ModalGameStart() {
           possible
         </p>
         <button onClick={handleGameStart}>Start Game</button>
+        <h1 className="title-top">Top 10 players</h1>
+        <div className="leaderboards-container">
+          <div className="leaderboard">
+            <Leaderboard level={1} />
+          </div>
+          <div className="leaderboard">
+            <Leaderboard level={2} />
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -3,6 +3,11 @@ const levels = [
     id: "level1",
     name: "Level 1",
     image: "./images/level1.jpg",
+    leaderboard: [
+      { name: "Moki", time: 29246 },
+      { name: "Bobby", time: 98006 },
+      { name: "Park", time: 107030 },
+    ],
     characters: [
       {
         id: 0,
@@ -34,6 +39,11 @@ const levels = [
     id: "level2",
     name: "Level 2",
     image: "./images/level2.png",
+    leaderboard: [
+      { name: "Tim", time: 89246 },
+      { name: "Tammy", time: 98006 },
+      { name: "Tomato", time: 107030 },
+    ],
     characters: [
       {
         id: 3,

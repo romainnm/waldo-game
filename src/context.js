@@ -9,12 +9,15 @@ const AppProvider = ({ children }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [alert, setAlert] = useState({ show: false, type: "", msgAlert: "" });
   const [startTimer, setStartTimer] = useState(false);
-  const [waitStartGame, setWaitStartGame] = useState(true);
+  const [finalTime, setFinalTime] = useState(0);
   const [gameTimer, setGameTimer] = useState(0);
+  const [waitStartGame, setWaitStartGame] = useState(true);
   const [gameStart, setGameStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [comingSoon, setComingSoon] = useState(false);
-  const [finalTime, setFinalTime] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [leaderboards, setLeaderboards] = useState([]);
+  const [topTen, setTopTen] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [clickPosition, setClickPosition] = useState({
     left: 0,
@@ -45,6 +48,20 @@ const AppProvider = ({ children }) => {
     }
     // eslint-disable-next-line
   }, [gameStart]);
+  /* === Initialize Leaderboard === */
+  useEffect(() => {
+    setLoading(true);
+    setLeaderboards(
+      levels.map((level) => {
+        if (level) {
+          setLeaderboards([...leaderboards, level.leaderboard]);
+        }
+        return level.leaderboard;
+      })
+    );
+    setLoading(false);
+    // eslint-disable-next-line
+  }, []);
 
   /* === Alert logics === */
   const handleAlert = (show, type, msg) => {
@@ -54,7 +71,6 @@ const AppProvider = ({ children }) => {
       msgAlert: msg,
     });
   };
-
   useEffect(() => {
     if (alert.show) {
       const timer = setTimeout(() => {
@@ -64,20 +80,22 @@ const AppProvider = ({ children }) => {
       return () => clearTimeout(timer);
     }
   }, [alert]);
+
   /* === Game Start & End logics === */
   // Start
   const handleGameStart = () => {
     setComingSoon(false);
     setWaitStartGame(false);
     setGameOver(false);
+    setTopTen(false);
     setGameStart(true);
     setStartTimer(true);
   };
   useEffect(() => {
     if (startTimer) {
       const timer = setInterval(() => {
-        setGameTimer((prev) => prev + 1);
-      }, 1000);
+        setGameTimer((prev) => prev + 10);
+      }, 10);
       return () => clearInterval(timer);
     }
   }, [startTimer]);
@@ -88,6 +106,7 @@ const AppProvider = ({ children }) => {
       setGameStart(false);
       setGameOver(true);
       setFinalTime(gameTimer);
+      enterLeader(gameTimer);
       setStartTimer(false);
       setGameTimer(0);
       handleAlert(true, "success", "Good job, you found everyone!");
@@ -119,6 +138,40 @@ const AppProvider = ({ children }) => {
   const restart = () => {
     setLevelSelected(1);
     setWaitStartGame(true);
+  };
+
+  /* === Leaderboard logics === */
+  const getTopTen = (level) => {
+    return leaderboards[level - 1]
+      ?.sort((a, b) => a.time - b.time)
+      .slice(0, 10);
+  };
+  const enterLeader = (playerTime) => {
+    const topPlayers = getTopTen(levelSelected);
+    /* Enter the leaderboard if there are less than 10 players 
+    or current time is better than player 10 */
+    if (!topPlayers[9]) {
+      setTopTen(true);
+    }
+    if (topPlayers[9] && playerTime < topPlayers[9].time) {
+      setTopTen(true);
+    }
+  };
+  // Add player to leaderboard
+  const addLeaderboard = (e, playerName, playerTime) => {
+    e.preventDefault();
+    const newEntry = { name: playerName, time: playerTime };
+    const currentLeaderboard = leaderboards[levelSelected - 1];
+    setLeaderboards(
+      leaderboards.map((leaderboard) => {
+        if (leaderboard === currentLeaderboard) {
+          const leaderboardUpdate = [...leaderboard, newEntry];
+          return leaderboardUpdate;
+        }
+        return leaderboard;
+      })
+    );
+    setTopTen(false);
   };
 
   /* === Click & coordintates logics === */
@@ -235,10 +288,14 @@ const AppProvider = ({ children }) => {
         handleGameStart,
         handleCharacterSelection,
         handleImageClick,
-        selectedCharacter,
+        leaderboards,
         playAgain,
         restart,
         comingSoon,
+        loading,
+        topTen,
+        addLeaderboard,
+        getTopTen,
       }}
     >
       {children}
