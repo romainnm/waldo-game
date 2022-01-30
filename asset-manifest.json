@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/waldo-game/static/css/main.33cc5a7f.chunk.css",
+    "main.js": "/waldo-game/static/js/main.da66a4d9.chunk.js",
+    "main.js.map": "/waldo-game/static/js/main.da66a4d9.chunk.js.map",
+    "runtime-main.js": "/waldo-game/static/js/runtime-main.256591a0.js",
+    "runtime-main.js.map": "/waldo-game/static/js/runtime-main.256591a0.js.map",
+    "static/js/2.b66792e9.chunk.js": "/waldo-game/static/js/2.b66792e9.chunk.js",
+    "static/js/2.b66792e9.chunk.js.map": "/waldo-game/static/js/2.b66792e9.chunk.js.map",
+    "index.html": "/waldo-game/index.html",
+    "static/css/main.33cc5a7f.chunk.css.map": "/waldo-game/static/css/main.33cc5a7f.chunk.css.map",
+    "static/js/2.b66792e9.chunk.js.LICENSE.txt": "/waldo-game/static/js/2.b66792e9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.256591a0.js",
+    "static/js/2.b66792e9.chunk.js",
+    "static/css/main.33cc5a7f.chunk.css",
+    "static/js/main.da66a4d9.chunk.js"
+  ]
+}
