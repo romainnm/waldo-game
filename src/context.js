@@ -215,6 +215,7 @@ const AppProvider = ({ children }) => {
     }
   };
   useEffect(() => {
+    //Change dropdown display position depending of click coordinates(X)
     if (clickPosition.left < 50 && showDropdown) {
       dropdownPosition(
         "left",
