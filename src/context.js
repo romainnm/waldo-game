@@ -202,17 +202,35 @@ const AppProvider = ({ children }) => {
     setShowDropdown(false);
   };
   // update the dropdown position onclick
-  const dropdownPosition = (refContainer, x, y) => {
-    refContainer.current.style.left = `${x}`;
-    refContainer.current.style.top = `${y}`;
+  const dropdownPosition = (side, refContainer, x, y) => {
+    if (side === "left") {
+      refContainer.current.style.right = "unset";
+      refContainer.current.style.left = `${x}`;
+      refContainer.current.style.top = `${y}`;
+    }
+    if (side === "right") {
+      refContainer.current.style.left = "unset";
+      refContainer.current.style.right = `${x}`;
+      refContainer.current.style.top = `${y}`;
+    }
   };
   useEffect(() => {
-    if (showDropdown) {
+    if (clickPosition.left < 50 && showDropdown) {
       dropdownPosition(
+        "left",
         dropdownContainer,
         clickPosition.left + 2 + "%",
         clickPosition.top - 5 + "%"
       );
+    }
+    if (clickPosition.left > 50 && showDropdown) {
+      dropdownPosition(
+        "right",
+        dropdownContainer,
+        (100-clickPosition.left) + 2 + "%",
+        clickPosition.top - 5 + "%"
+      );
+      console.log(100 - clickPosition.left);
     }
     // eslint-disable-next-line
   }, [clickPosition]);
@@ -296,6 +314,7 @@ const AppProvider = ({ children }) => {
         topTen,
         addLeaderboard,
         getTopTen,
+        closeDropdown,
       }}
     >
       {children}

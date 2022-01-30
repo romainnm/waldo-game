@@ -151,6 +151,12 @@ header {
   font-size: 0.725rem;
   padding-left: 10px;
 }
+.close-btn{
+  border:0;
+  background: none;
+  float: right;
+  font-size: 1.5rem;
+}
 .modal {
   width: 100%;
   height: auto;
